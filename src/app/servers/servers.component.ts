@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 
 @Component({
@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ServersComponent implements OnInit {
   allowNewServer = false;
+  @Output() newServerCreated: EventEmitter<boolean> =   new EventEmitter();
+  @Input() count: number;
 
   constructor() {
     console.log('contructor');
@@ -15,6 +17,12 @@ export class ServersComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('oninit');
+  }
+
+  createNewServer() {
+    console.log('createNewServer');
+    this.allowNewServer = !this.allowNewServer;
+    this.newServerCreated.emit(true);
   }
 
 }
